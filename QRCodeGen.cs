@@ -18,11 +18,10 @@ namespace QRCodeGen
     {
         [FunctionName("Form")]
         public static HttpResponseMessage Form(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log, ExecutionContext context)
         {
             // read in text from a hosted file
-            string indexPage = File.ReadAllText(@"./www/index.html");
+            string indexPage = File.ReadAllText(context.FunctionAppDirectory + "/www/index.html");
 
             // create a new HTTP Response Message
             var result = new HttpResponseMessage(HttpStatusCode.OK);
